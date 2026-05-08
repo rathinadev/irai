@@ -1,0 +1,57 @@
+.sessionCard {
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.sessionCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.past {
+  opacity: 0.8;
+  background-color: var(--gray-100);
+}
+
+.past:hover {
+  transform: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-md);
+}
+
+.title {
+  margin: 0;
+  font-size: 16px;
+  color: var(--blue-deep);
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: var(--space-md);
+  flex-grow: 1;
+}
+
+.detailRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--gray-700);
+}
+
+.icon {
+  color: var(--teal);
+}
+
+.actions {
+  margin-top: auto;
+}

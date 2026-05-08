@@ -1,0 +1,95 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  font-family: var(--font-body);
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Sizes */
+.sm {
+  padding: 6px 12px;
+  font-size: 14px;
+}
+
+.md {
+  padding: 10px 16px;
+  font-size: 16px;
+}
+
+.lg {
+  padding: 12px 24px;
+  font-size: 18px;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+/* Variants */
+.primary {
+  background-color: var(--teal);
+  color: var(--white);
+}
+
+.primary:hover:not(:disabled) {
+  background-color: var(--teal-deep);
+  transform: translateY(-1px);
+}
+
+.secondary {
+  background-color: var(--blue-light);
+  color: var(--blue-deep);
+}
+
+.secondary:hover:not(:disabled) {
+  background-color: var(--blue);
+  color: var(--white);
+  transform: translateY(-1px);
+}
+
+.outline {
+  background-color: transparent;
+  border: 1px solid var(--teal);
+  color: var(--teal);
+}
+
+.outline:hover:not(:disabled) {
+  background-color: var(--sage);
+}
+
+.ghost {
+  background-color: transparent;
+  color: var(--charcoal);
+}
+
+.ghost:hover:not(:disabled) {
+  background-color: var(--gray-100);
+}
+
+.danger {
+  background-color: var(--error);
+  color: var(--white);
+}
+
+.danger:hover:not(:disabled) {
+  background-color: #d32f2f;
+}
+
+.success {
+  background-color: var(--success);
+  color: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.success:hover {
+  background-color: #388E3C;
+}

@@ -1,0 +1,202 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: var(--gray-500);
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: var(--space-sm);
+  transition: color var(--transition-fast);
+  align-self: flex-start;
+}
+
+.backBtn:hover {
+  color: var(--teal);
+}
+
+.headerCard {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-100);
+  margin-bottom: var(--space-md);
+}
+
+.clientProfile {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+.name {
+  font-size: 28px;
+  color: var(--blue-deep);
+  margin-bottom: 4px;
+}
+
+.email {
+  color: var(--gray-500);
+  margin-bottom: 12px;
+}
+
+.tags {
+  display: flex;
+  gap: 8px;
+}
+
+.headerActions {
+  display: flex;
+  gap: 12px;
+}
+
+/* Tabs Content */
+.tabGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-lg);
+}
+
+.sideCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.cardHeader h3 {
+  font-size: 18px;
+  color: var(--blue-deep);
+  margin-bottom: var(--space-md);
+}
+
+.aiText {
+  color: var(--charcoal);
+  font-size: 14px;
+  line-height: 1.6;
+  background-color: var(--sage);
+  padding: 12px;
+  border-radius: var(--radius-sm);
+}
+
+.metricsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.metricItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.metricItem span {
+  color: var(--gray-500);
+  font-size: 14px;
+}
+
+.metricItem strong {
+  color: var(--blue-deep);
+  font-size: 16px;
+}
+
+/* Documents */
+.docGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: var(--space-lg);
+}
+
+.docCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.docHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.docTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: var(--charcoal);
+}
+
+.docIcon {
+  color: var(--teal);
+}
+
+.docDate {
+  font-size: 12px;
+  color: var(--gray-500);
+}
+
+.docSummary {
+  font-size: 14px;
+  color: var(--gray-700);
+  line-height: 1.5;
+  margin-bottom: var(--space-md);
+}
+
+.indicators {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.indicator.normal {
+  background-color: #E8F5E9;
+  color: #2E7D32;
+}
+
+.indicator.warning {
+  background-color: #FFF3E0;
+  color: #E65100;
+}
+
+.indicator.critical {
+  background-color: #FFEBEE;
+  color: #C62828;
+}
+
+@media (max-width: 1024px) {
+  .headerCard {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-lg);
+  }
+  
+  .tabGrid {
+    grid-template-columns: 1fr;
+  }
+}

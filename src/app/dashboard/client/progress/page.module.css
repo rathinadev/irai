@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.header {
+  margin-bottom: var(--space-md);
+}
+
+.title {
+  font-size: 28px;
+  color: var(--blue-deep);
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  color: var(--gray-500);
+  font-size: 16px;
+  margin: 0;
+}
+
+.mainGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+.cardHeader {
+  margin-bottom: var(--space-xl);
+}
+
+.cardHeader h3 {
+  font-size: 20px;
+  color: var(--blue-deep);
+  margin-bottom: 4px;
+}
+
+.cardHeader p {
+  color: var(--gray-500);
+  font-size: 14px;
+  margin: 0;
+}
+
+.badgeGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md);
+}

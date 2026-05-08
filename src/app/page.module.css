@@ -1,0 +1,276 @@
+.container {
+  min-height: 100vh;
+  background-color: var(--cream);
+  overflow-x: hidden;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) var(--space-xl);
+  background-color: var(--white);
+  border-bottom: 1px solid var(--gray-100);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logoIcon {
+  height: 32px;
+  width: auto;
+}
+
+.logoText {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--blue-deep);
+  letter-spacing: 2px;
+}
+
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.navLink {
+  color: var(--charcoal);
+  font-weight: 500;
+}
+
+.navLink:hover {
+  color: var(--teal);
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  padding: 80px 20px 120px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.heroBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at top right, var(--teal-50), transparent 50%),
+              radial-gradient(circle at bottom left, var(--sage), transparent 50%);
+  z-index: 0;
+  opacity: 0.7;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fullLogo {
+  max-width: 400px;
+  margin-bottom: var(--space-xl);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+}
+
+.heroTitle {
+  font-size: 32px;
+  margin-bottom: var(--space-md);
+  color: var(--blue-deep);
+}
+
+.dot {
+  color: var(--teal);
+  margin: 0 4px;
+}
+
+.heroSubtitle {
+  font-size: 20px;
+  color: var(--gray-700);
+  margin-bottom: var(--space-2xl);
+  line-height: 1.6;
+  max-width: 700px;
+}
+
+/* Pillars */
+.pillarsSection {
+  padding: 80px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 60px;
+  color: var(--blue-deep);
+}
+
+.pillarsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-lg);
+}
+
+.pillarCard {
+  text-align: center;
+  height: 100%;
+  transition: transform var(--transition-normal);
+}
+
+.pillarCard:hover {
+  transform: translateY(-5px);
+}
+
+.iconCircle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-md);
+}
+
+.pillarCard h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: var(--charcoal);
+}
+
+.pillarCard p {
+  color: var(--gray-500);
+  font-size: 14px;
+}
+
+/* How It Works */
+.howItWorks {
+  padding: 80px 20px;
+  background-color: var(--sage);
+}
+
+.stepsGrid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+  text-align: center;
+}
+
+.stepNumber {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--teal);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  margin: 0 auto var(--space-md);
+}
+
+.step h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: var(--blue-deep);
+}
+
+.step p {
+  color: var(--gray-700);
+  line-height: 1.6;
+}
+
+/* CTA Section */
+.ctaSection {
+  padding: 100px 20px;
+  text-align: center;
+  background-color: var(--white);
+}
+
+.ctaSection h2 {
+  font-size: 36px;
+  margin-bottom: 16px;
+}
+
+.ctaSection p {
+  font-size: 18px;
+  color: var(--gray-500);
+  margin-bottom: 32px;
+}
+
+/* Footer */
+.footer {
+  background-color: var(--charcoal);
+  color: var(--white);
+  padding: var(--space-xl) 20px;
+}
+
+.footerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footerBrand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logoIconSmall {
+  height: 24px;
+  filter: brightness(0) invert(1);
+}
+
+.logoTextSmall {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
+.copyright {
+  color: var(--gray-300);
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 24px;
+  }
+  
+  .fullLogo {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+  
+  .stepsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .footerContent {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+}

@@ -1,0 +1,29 @@
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--cream);
+}
+
+.main {
+  display: flex;
+  flex-grow: 1;
+}
+
+.contentWrapper {
+  flex-grow: 1;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.content {
+  padding: var(--space-xl);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: var(--space-md);
+  }
+}

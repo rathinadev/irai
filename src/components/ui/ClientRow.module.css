@@ -1,0 +1,94 @@
+.clientRow {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1fr auto;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--gray-100);
+  transition: background-color var(--transition-fast);
+  cursor: pointer;
+}
+
+.clientRow:hover {
+  background-color: var(--sage);
+}
+
+.clientInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.name {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  color: var(--blue-deep);
+}
+
+.label {
+  display: block;
+  font-size: 12px;
+  color: var(--gray-500);
+  margin-bottom: 4px;
+}
+
+.value {
+  font-size: 14px;
+  color: var(--charcoal);
+  font-weight: 500;
+}
+
+.progressCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.progressWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progressBar {
+  flex-grow: 1;
+  height: 6px;
+  background-color: var(--gray-100);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 1s ease-out;
+}
+
+.progressValue {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--charcoal);
+  min-width: 36px;
+}
+
+.actionCol {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+  .clientRow {
+    grid-template-columns: 1fr auto;
+    grid-template-areas: 
+      "info action"
+      "progress progress"
+      "next last";
+    row-gap: var(--space-md);
+  }
+
+  .clientInfo { grid-area: info; }
+  .actionCol { grid-area: action; }
+  .progressCol { grid-area: progress; }
+  
+  .dateCol:nth-child(3) { grid-area: next; }
+  .dateCol:nth-child(4) { grid-area: last; text-align: right; }
+}
