@@ -1,9 +1,12 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Card } from '@/components/ui/Card';
 import { AchievementBadge } from '@/components/ui/AchievementBadge';
 import { ProgressLine } from '@/components/charts/ProgressLine';
+import { SkillRadar } from '@/components/charts/SkillRadar';
+import { mockRadarData, mockPreviousRadarData } from '@/data/mock-data';
+import { Badge } from '@/components/ui/Badge';
 import { Flame, Star, Target, ShieldCheck } from 'lucide-react';
 import styles from './page.module.css';
 
@@ -16,6 +19,21 @@ const mockProgressData = [
 ];
 
 export default function ClientProgress() {
+  const [radarData, setRadarData] = useState(mockRadarData);
+  const [isGoalCompleted, setIsGoalCompleted] = useState(false);
+
+  const handleCompleteGoal = () => {
+    setIsGoalCompleted(true);
+    setRadarData(prev => ({
+      flexibility: Math.min(100, prev.flexibility + Math.floor(Math.random() * 6) + 5),
+      strength: Math.min(100, prev.strength + Math.floor(Math.random() * 6) + 5),
+      breathing: Math.min(100, prev.breathing + Math.floor(Math.random() * 6) + 5),
+      mentalFocus: Math.min(100, prev.mentalFocus + Math.floor(Math.random() * 6) + 5),
+      painReduction: Math.min(100, prev.painReduction + Math.floor(Math.random() * 6) + 5),
+      consistency: Math.min(100, prev.consistency + Math.floor(Math.random() * 6) + 5),
+    }));
+  };
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -25,9 +43,34 @@ export default function ClientProgress() {
 
       <div className={styles.mainGrid}>
         <Card padding="lg" className={styles.chartCard}>
-          <div className={styles.cardHeader}>
-            <h3>Growth Over Time</h3>
-            <p>Your improvement across key dimensions over the last 5 months.</p>
+          <div className={styles.cardHeader} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+            <div>
+              <h3 style={{ margin: 0, fontSize: '18px', color: 'var(--blue-deep)' }}>Your Skill Radar</h3>
+              <p style={{ margin: '4px 0 0 0', fontSize: '14px', color: 'var(--gray-500)' }}>A holistic view of your 6 wellness dimensions.</p>
+            </div>
+            <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+              <button 
+                onClick={handleCompleteGoal}
+                disabled={isGoalCompleted}
+                style={{
+                  padding: '4px 10px', borderRadius: '12px', border: 'none',
+                  background: isGoalCompleted ? 'var(--sage)' : 'var(--teal)',
+                  color: isGoalCompleted ? 'var(--success)' : 'white',
+                  fontSize: '11px', fontWeight: 600, cursor: isGoalCompleted ? 'default' : 'pointer'
+                }}
+              >
+                {isGoalCompleted ? 'Goal Completed ✓' : 'Complete Goal (+5 XP)'}
+              </button>
+              <Badge variant="outline">Current vs Previous</Badge>
+            </div>
+          </div>
+          <SkillRadar data={radarData} comparisonData={mockPreviousRadarData} />
+        </Card>
+
+        <Card padding="lg" className={styles.chartCard}>
+          <div className={styles.cardHeader} style={{ marginBottom: '16px' }}>
+            <h3 style={{ margin: 0, fontSize: '18px', color: 'var(--blue-deep)' }}>Growth Over Time</h3>
+            <p style={{ margin: '4px 0 0 0', fontSize: '14px', color: 'var(--gray-500)' }}>Your improvement across key dimensions over the last 5 months.</p>
           </div>
           <ProgressLine 
             data={mockProgressData} 
@@ -40,9 +83,9 @@ export default function ClientProgress() {
         </Card>
 
         <Card padding="lg" className={styles.achievementsCard}>
-          <div className={styles.cardHeader}>
-            <h3>Milestones & Badges</h3>
-            <p>Your earned achievements.</p>
+          <div className={styles.cardHeader} style={{ marginBottom: '16px' }}>
+            <h3 style={{ margin: 0, fontSize: '18px', color: 'var(--blue-deep)' }}>Milestones & Badges</h3>
+            <p style={{ margin: '4px 0 0 0', fontSize: '14px', color: 'var(--gray-500)' }}>Your earned achievements.</p>
           </div>
           
           <div className={styles.badgeGrid}>

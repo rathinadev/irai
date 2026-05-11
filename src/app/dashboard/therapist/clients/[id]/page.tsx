@@ -10,11 +10,18 @@ import { Tabs } from '@/components/ui/Tabs';
 import { SkillRadar } from '@/components/charts/SkillRadar';
 import { mockRadarData, mockPreviousRadarData, clients, mockDocuments } from '@/data/mock-data';
 import { ArrowLeft, FileText, AlertTriangle, CheckCircle2, MessageSquare } from 'lucide-react';
+import { Modal } from '@/components/ui/Modal';
 import styles from './page.module.css';
 
-export default function ClientDetail({ params }: { params: { id: string } }) {
+export default function ClientDetail({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
-  const client = clients.find(u => u.id === params.id);
+  const { id } = React.use(params);
+  const client = clients.find(u => u.id === id);
+
+  const [isMessageOpen, setIsMessageOpen] = React.useState(false);
+  const [isBookingOpen, setIsBookingOpen] = React.useState(false);
+  const [bookingDate, setBookingDate] = React.useState('');
+  const [bookingTime, setBookingTime] = React.useState('');
 
   if (!client) {
     return <div>Client not found</div>;
@@ -100,14 +107,14 @@ export default function ClientDetail({ params }: { params: { id: string } }) {
             <h1 className={styles.name}>{client.name}</h1>
             <p className={styles.email}>{client.email}</p>
             <div className={styles.tags}>
-              <Badge variant={client.tier === 'elite' ? 'gold' : 'primary'}>{client.tier} Plan</Badge>
+              <Badge variant={client.tier === 'transform' ? 'gold' : 'primary'}>{client.tier} Plan</Badge>
               <Badge variant="outline">Onboarded: Jan 2026</Badge>
             </div>
           </div>
         </div>
         <div className={styles.headerActions}>
-          <Button variant="outline"><MessageSquare size={16} /> Message</Button>
-          <Button variant="primary">Book Session</Button>
+          <Button variant="outline" onClick={() => setIsMessageOpen(true)}><MessageSquare size={16} /> Message</Button>
+          <Button variant="primary" onClick={() => setIsBookingOpen(true)}>Book Session</Button>
         </div>
       </div>
 
@@ -118,6 +125,47 @@ export default function ClientDetail({ params }: { params: { id: string } }) {
           { id: 'notes', label: 'Therapist Notes', content: <Card padding="lg"><p>Session notes history goes here.</p></Card> }
         ]}
       />
+
+      {/* Message Modal */}
+      <Modal isOpen={isMessageOpen} onClose={() => setIsMessageOpen(false)} title={`Message ${client.name}`}>
+        <div style={{ padding: '16px 0' }}>
+          <div style={{ height: '200px', backgroundColor: 'var(--gray-50)', borderRadius: '8px', padding: '16px', marginBottom: '16px', overflowY: 'auto' }}>
+            <p style={{ margin: '0 0 8px 0', color: 'var(--gray-500)', fontSize: '12px' }}>Today</p>
+            <div style={{ backgroundColor: 'var(--teal-50)', padding: '10px', borderRadius: '8px', maxWidth: '80%', marginBottom: '8px' }}>
+              <p style={{ margin: 0, color: 'var(--teal-deep)' }}>Hello {client.name.split(' ')[0]}, how are you feeling after the last session?</p>
+            </div>
+            <p style={{ margin: '0 0 4px 0', color: 'var(--gray-500)', fontSize: '12px', textAlign: 'right' }}>Patient</p>
+            <div style={{ backgroundColor: 'var(--white)', border: '1px solid var(--gray-200)', padding: '10px', borderRadius: '8px', maxWidth: '80%', marginLeft: 'auto' }}>
+              <p style={{ margin: 0, color: 'var(--charcoal)' }}>The stretches helped a lot! My lower back feels much less stiff.</p>
+            </div>
+          </div>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <input type="text" placeholder="Type a message..." style={{ flexGrow: 1, padding: '10px', border: '1px solid var(--gray-300)', borderRadius: '8px' }} />
+            <Button variant="primary">Send</Button>
+          </div>
+        </div>
+      </Modal>
+
+      {/* Booking Modal */}
+      <Modal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} title="Schedule Follow-up Session">
+        <div style={{ padding: '16px 0' }}>
+          <div style={{ marginBottom: '16px' }}>
+            <label style={{ display: 'block', marginBottom: '6px', fontWeight: 600 }}>Select Date</label>
+            <input type="date" value={bookingDate} onChange={(e) => setBookingDate(e.target.value)} style={{ width: '100%', padding: '10px', border: '1px solid var(--gray-300)', borderRadius: '8px' }} />
+          </div>
+          <div style={{ marginBottom: '16px' }}>
+            <label style={{ display: 'block', marginBottom: '6px', fontWeight: 600 }}>Select Time</label>
+            <select value={bookingTime} onChange={(e) => setBookingTime(e.target.value)} style={{ width: '100%', padding: '10px', border: '1px solid var(--gray-300)', borderRadius: '8px' }}>
+              <option value="">Select Time</option>
+              <option value="09:00">09:00 AM</option>
+              <option value="10:00">10:00 AM</option>
+              <option value="14:00">02:00 PM</option>
+              <option value="16:00">04:00 PM</option>
+            </select>
+          </div>
+          <Button variant="primary" fullWidth disabled={!bookingDate || !bookingTime} onClick={() => { alert('Session Booked!'); setIsBookingOpen(false); }}>Confirm Booking</Button>
+        </div>
+      </Modal>
     </div>
   );
 }

@@ -58,11 +58,81 @@
   line-height: 1.6;
 }
 
-.pricingGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-xl);
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
   margin-bottom: var(--space-3xl);
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.pricingTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.pricingTable th, .pricingTable td {
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.pricingTable th {
+  background-color: var(--teal-50);
+  color: var(--blue-deep);
+  font-weight: 700;
+  font-size: 18px;
+  width: 20%;
+}
+
+.pricingTable th:first-child {
+  background-color: var(--white);
+  width: 25%;
+}
+
+.pricingTable td {
+  color: var(--charcoal);
+  font-size: 15px;
+  vertical-align: top;
+}
+
+.pricingTable tr:last-child td {
+  border-bottom: none;
+}
+
+.featureCell {
+  font-weight: 600;
+  color: var(--gray-700);
+  background-color: var(--gray-50);
+}
+
+.priceRow {
+  background-color: var(--teal-50);
+}
+
+.priceText {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--teal-deep);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.selectBtn {
+  background-color: var(--teal);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  width: 100%;
+  transition: opacity 0.2s;
+}
+
+.selectBtn:hover {
+  opacity: 0.9;
 }
 
 .faqSection {
@@ -103,22 +173,14 @@
   color: var(--gray-500);
 }
 
-@media (max-width: 1024px) {
-  .pricingGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 @media (max-width: 768px) {
   .title {
     font-size: 36px;
   }
   
-  .pricingGrid {
-    grid-template-columns: 1fr;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
+  .pricingTable th, .pricingTable td {
+    padding: var(--space-md);
+    font-size: 14px;
   }
   
   .faqGrid {

@@ -11,7 +11,7 @@ import { Badge } from '../ui/Badge';
 import styles from './Navbar.module.css';
 
 export function Navbar() {
-  const { user, role, logout } = useAuth();
+  const { user, role, logout, switchTier } = useAuth();
   const { isDarkMode, toggleTheme } = useTheme();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const router = useRouter();
@@ -41,6 +41,20 @@ export function Navbar() {
 
       {user && (
         <div className={styles.right}>
+          {role === 'client' && (
+            <div className={styles.demoControls}>
+              <select 
+                value={user?.tier || ''} 
+                onChange={(e) => switchTier(e.target.value as any)}
+                className={styles.tierSelect}
+                title="Demo Tier Switcher"
+              >
+                <option value="foundation">Foundation Plan</option>
+                <option value="balanced">Balanced Plan</option>
+                <option value="transform">Transform Plan</option>
+              </select>
+            </div>
+          )}
           <div className={styles.roleBadge}>
             <Badge variant="outline">{role}</Badge>
           </div>

@@ -17,7 +17,11 @@ export default function LoginPage() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     login(selectedRole);
-    router.push(`/dashboard/${selectedRole}`);
+    if (selectedRole === 'client') {
+      router.push('/onboarding');
+    } else {
+      router.push(`/dashboard/${selectedRole}`);
+    }
   };
 
   const roles: { id: Role; label: string }[] = [

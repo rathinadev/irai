@@ -3,11 +3,14 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { User, Role, clients, therapists, admins } from '../data/mock-data';
 
+import { ClientTier } from '../data/mock-data';
+
 interface AuthContextType {
   user: User | null;
   role: Role | null;
   login: (role: Role) => void;
   logout: () => void;
+  switchTier: (tier: ClientTier) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -32,8 +35,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setRole(null);
   };
 
+  const switchTier = (tier: ClientTier) => {
+    if (user && user.role === 'client') {
+      setUser({ ...user, tier });
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, role, login, logout }}>
+    <AuthContext.Provider value={{ user, role, login, logout, switchTier }}>
       {children}
     </AuthContext.Provider>
   );

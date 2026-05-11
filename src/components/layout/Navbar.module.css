@@ -157,3 +157,18 @@
     display: flex;
   }
 }
+
+.demoControls {
+  margin-right: 12px;
+}
+
+.tierSelect {
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--teal);
+  background: var(--teal-50);
+  color: var(--teal-deep);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}

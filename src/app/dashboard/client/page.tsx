@@ -7,9 +7,9 @@ import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { StatsCard } from '@/components/ui/StatsCard';
 import { SessionCard } from '@/components/ui/SessionCard';
-import { SkillRadar } from '@/components/charts/SkillRadar';
 import { Modal } from '@/components/ui/Modal';
-import { mockRadarData, mockPreviousRadarData, mockSessions } from '@/data/mock-data';
+import { Button } from '@/components/ui/Button';
+import { mockSessions } from '@/data/mock-data';
 import { Calendar, Activity, Zap, Trophy } from 'lucide-react';
 import styles from './page.module.css';
 
@@ -17,43 +17,62 @@ export default function ClientDashboard() {
   const { user } = useAuth();
   const router = useRouter();
   const [selectedNotes, setSelectedNotes] = useState<string | null>(null);
-  const [radarData, setRadarData] = useState(mockRadarData);
-  const [isGoalCompleted, setIsGoalCompleted] = useState(false);
   const [waterGlasses, setWaterGlasses] = useState(0);
   
-  // Filter sessions for this user or group sessions
-  const mySessions = mockSessions.filter(s => 
-    s.status !== 'available' && s.clientName !== 'Multiple (12)' // Simulating client filter
-  );
+  // Filter sessions based on tier constraints
+  const mySessions = mockSessions.filter(s => {
+    if (s.status === 'available') return false;
+    
+    // Transform tier doesn't have group yoga
+    if (user?.tier === 'transform' && s.clientName === 'Multiple (12)') return false;
+    
+    // Foundation tier ONLY has group yoga (No 1-on-1)
+    if (user?.tier === 'foundation' && s.clientName !== 'Multiple (12)') return false;
+    
+    return true;
+  });
 
-  const handleCompleteGoal = () => {
-    setIsGoalCompleted(true);
-    setRadarData(prev => ({
-      flexibility: Math.min(100, prev.flexibility + Math.floor(Math.random() * 6) + 5),
-      strength: Math.min(100, prev.strength + Math.floor(Math.random() * 6) + 5),
-      breathing: Math.min(100, prev.breathing + Math.floor(Math.random() * 6) + 5),
-      mentalFocus: Math.min(100, prev.mentalFocus + Math.floor(Math.random() * 6) + 5),
-      painReduction: Math.min(100, prev.painReduction + Math.floor(Math.random() * 6) + 5),
-      consistency: Math.min(100, prev.consistency + Math.floor(Math.random() * 6) + 5),
-    }));
-  };
-  
-  // Add group session back for demo
-  if (mockSessions[1]) mySessions.unshift(mockSessions[1]);
+  const tier = user?.tier || 'foundation';
+  const services = [
+    { name: '1-on-1 Yoga Therapy', available: tier === 'foundation' ? 'No' : tier === 'balanced' ? '4 Sessions / mo' : '12 Sessions / mo', locked: tier === 'foundation' },
+    { name: 'Doctor Consultation', available: tier === 'foundation' ? 'No' : '2 Sessions / mo', locked: tier === 'foundation' },
+    { name: 'Nutrition Support', available: tier === 'foundation' ? 'General Plan' : tier === 'balanced' ? '2 Sessions / mo' : '4 Sessions / mo', locked: false },
+    { name: 'Physiotherapy', available: tier === 'transform' ? '4 Sessions / mo' : 'No', locked: tier !== 'transform' },
+    { name: 'Psychologist Support', available: tier === 'transform' ? '2 Sessions / mo' : 'No', locked: tier !== 'transform' },
+  ];
 
   return (
     <div className={styles.container}>
+      <div className={styles.blob1}></div>
+      <div className={styles.blob2}></div>
       <header className={styles.header}>
         <div>
           <h1 className={styles.title}>Good morning, {user?.name.split(' ')[0]} 🙏</h1>
           <p className={styles.subtitle}>Welcome back to your wellness journey.</p>
         </div>
         <div className={styles.tierBadge}>
-          <Badge variant={user?.tier === 'elite' ? 'gold' : 'primary'}>
+          <Badge variant={user?.tier === 'transform' ? 'gold' : 'primary'}>
             {user?.tier} Plan
           </Badge>
         </div>
       </header>
+
+      <div className={styles.notificationsArea}>
+        <div className={styles.notificationItem}>
+          <span className={styles.notifIcon}>💬</span>
+          <div className={styles.notifContent}>
+            <strong>New message from Dr. Sarah</strong>
+            <p>"Hello John, how are you feeling after the last session?"</p>
+          </div>
+        </div>
+        <div className={styles.notificationItem}>
+          <span className={styles.notifIcon}>📅</span>
+          <div className={styles.notifContent}>
+            <strong>New session scheduled</strong>
+            <p>Your follow-up session is confirmed for Tomorrow at 10:00 AM.</p>
+          </div>
+        </div>
+      </div>
 
       <div className={styles.statsGrid}>
         <StatsCard 
@@ -84,29 +103,56 @@ export default function ClientDashboard() {
       </div>
 
       <div className={styles.mainGrid}>
-        <Card className={styles.radarCard} padding="lg">
-          <div className={styles.cardHeader}>
-            <h3 className={styles.cardTitle}>Your Skill Radar</h3>
-            <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-              <button 
-                onClick={handleCompleteGoal}
-                disabled={isGoalCompleted}
-                style={{
-                  padding: '4px 10px', borderRadius: '12px', border: 'none',
-                  background: isGoalCompleted ? 'var(--sage)' : 'var(--teal)',
-                  color: isGoalCompleted ? 'var(--success)' : 'white',
-                  fontSize: '11px', fontWeight: 600, cursor: isGoalCompleted ? 'default' : 'pointer'
-                }}
-              >
-                {isGoalCompleted ? 'Goal Completed ✓' : 'Complete Goal (+5 XP)'}
-              </button>
-              <Badge variant="outline">Current vs Previous</Badge>
+        <div className={styles.mainCol}>
+          <Card className={styles.heroCard} padding="lg">
+            <div className={styles.heroContent}>
+              <Badge variant="gold" className={styles.heroBadge}>
+                {user?.tier === 'foundation' ? 'Daily Plan' : 'Active Program'}
+              </Badge>
+              <h2 className={styles.heroTitle}>
+                {user?.tier === 'foundation' ? 'General Wellness Practice' : 'Lower Back Recovery Plan'}
+              </h2>
+              <p className={styles.heroSubtitle}>
+                {user?.tier === 'foundation' ? 'Maintain your daily practice with guided general sessions.' : 'Focus on clinical recovery. You are 60% through this module.'}
+              </p>
+              <div className={styles.progressWrapper}>
+                <div className={styles.progressBar}>
+                  <div className={styles.progressFill} style={{ width: user?.tier === 'foundation' ? '30%' : '60%' }}></div>
+                </div>
+                <span className={styles.progressText}>
+                  {user?.tier === 'foundation' ? '30%' : '60%'} Complete
+                </span>
+              </div>
+              <button className={styles.heroBtn}>Resume Session</button>
             </div>
-          </div>
-          <p className={styles.cardDesc}>A holistic view of your 6 wellness dimensions.</p>
-          <SkillRadar data={radarData} comparisonData={mockPreviousRadarData} />
-        </Card>
+          </Card>
 
+          <div className={styles.bentoGrid}>
+            <Card padding="md" className={styles.bentoCard}>
+              <h4 className={styles.bentoTitle}>💡 Daily Focus</h4>
+              <p className={styles.bentoText}>Deep breathing and gentle spinal twists to release tension.</p>
+            </Card>
+            <Card padding="md" className={styles.bentoCard}>
+              <h4 className={styles.bentoTitle}>👩‍⚕️ Therapist Note</h4>
+              <p className={styles.bentoText}>"Focus on posture during work hours. Take breaks every 45 mins." - Dr. Sarah</p>
+            </Card>
+          </div>
+
+          <Card padding="lg" className={styles.servicesCard}>
+            <h3 className={styles.servicesTitle}>My Plan Benefits</h3>
+            <div className={styles.servicesList}>
+              {services.map((service, idx) => (
+                <div key={idx} className={`${styles.serviceItem} ${service.locked ? styles.serviceLocked : ''}`}>
+                  <span className={styles.serviceName}>{service.name}</span>
+                  <Badge variant={service.locked ? 'outline' : 'primary'}>
+                    {service.available}
+                  </Badge>
+                </div>
+              ))}
+            </div>
+          </Card>
+        </div>
+        
         <div className={styles.sideCol}>
           <Card className={styles.sessionsCard} padding="md">
             <div className={styles.cardHeader}>

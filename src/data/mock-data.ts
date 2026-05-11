@@ -1,6 +1,6 @@
 export type Role = 'client' | 'therapist' | 'admin';
 
-export type ClientTier = 'essential' | 'therapeutic' | 'elite';
+export type ClientTier = 'foundation' | 'balanced' | 'transform';
 export type TherapistSpecialty = 'yoga' | 'medical' | 'psychology' | 'physiology' | 'nutrition';
 
 export interface User {
@@ -14,11 +14,11 @@ export interface User {
 }
 
 export const clients: User[] = [
-  { id: 'c1', name: 'Priya Sharma', email: 'priya@example.com', role: 'client', avatar: '/avatars/client-priya.jpg', tier: 'elite' },
-  { id: 'c2', name: 'Rahul Verma', email: 'rahul@example.com', role: 'client', avatar: '/avatars/client-rahul.jpg', tier: 'therapeutic' },
-  { id: 'c3', name: 'Ananya Desai', email: 'ananya@example.com', role: 'client', avatar: '/avatars/client-ananya.jpg', tier: 'essential' },
-  { id: 'c4', name: 'Vikram Patel', email: 'vikram@example.com', role: 'client', avatar: '/avatars/client-vikram.jpg', tier: 'therapeutic' },
-  { id: 'c5', name: 'Lakshmi Nair', email: 'lakshmi@example.com', role: 'client', avatar: '/avatars/client-lakshmi.jpg', tier: 'elite' },
+  { id: 'c1', name: 'Priya Sharma', email: 'priya@example.com', role: 'client', avatar: '/avatars/client-priya.jpg', tier: 'transform' },
+  { id: 'c2', name: 'Rahul Verma', email: 'rahul@example.com', role: 'client', avatar: '/avatars/client-rahul.jpg', tier: 'balanced' },
+  { id: 'c3', name: 'Ananya Desai', email: 'ananya@example.com', role: 'client', avatar: '/avatars/client-ananya.jpg', tier: 'foundation' },
+  { id: 'c4', name: 'Vikram Patel', email: 'vikram@example.com', role: 'client', avatar: '/avatars/client-vikram.jpg', tier: 'balanced' },
+  { id: 'c5', name: 'Lakshmi Nair', email: 'lakshmi@example.com', role: 'client', avatar: '/avatars/client-lakshmi.jpg', tier: 'transform' },
 ];
 
 export const therapists: User[] = [

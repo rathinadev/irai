@@ -31,9 +31,11 @@ export function ClientRow({
         <Avatar src={avatar} alt={name} size="md" />
         <div>
           <h4 className={styles.name}>{name}</h4>
-          <Badge variant={tier === 'elite' ? 'gold' : tier === 'therapeutic' ? 'secondary' : 'outline'}>
+          <div className={styles.clientTier}>
+          <Badge variant={tier === 'transform' ? 'gold' : tier === 'balanced' ? 'secondary' : 'outline'}>
             {tier}
           </Badge>
+          </div>
         </div>
       </div>
 

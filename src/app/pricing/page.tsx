@@ -10,8 +10,9 @@ import styles from './page.module.css';
 export default function PricingPage() {
   const router = useRouter();
 
-  const handleSelectPlan = () => {
-    // In a real app, we'd pass the selected plan ID to the sign-up flow
+  const handleSelectPlan = (tierId: string) => {
+    // In a real app, we'd save the tier selection to local storage or state
+    localStorage.setItem('selectedTier', tierId);
     router.push('/login');
   };
 
@@ -34,12 +35,82 @@ export default function PricingPage() {
           </p>
         </div>
 
-        <div className={styles.pricingGrid}>
-          {pricingPlans.map((plan) => (
-            <div key={plan.id} className={styles.cardWrapper}>
-              <PricingCard plan={plan} onSelect={handleSelectPlan} />
-            </div>
-          ))}
+        <div className={styles.tableContainer}>
+          <table className={styles.pricingTable}>
+            <thead>
+              <tr>
+                <th>Services / Plans</th>
+                <th>Foundation</th>
+                <th>Balanced</th>
+                <th>Transform</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className={styles.featureCell}>1-on-1 Yoga Therapy</td>
+                <td>No</td>
+                <td>4 Sessions per month</td>
+                <td>12 Sessions per month</td>
+              </tr>
+              <tr>
+                <td className={styles.featureCell}>AI Personalization</td>
+                <td>Limited</td>
+                <td>Personalised recommendations and Tracking</td>
+                <td>Advanced optimization and Full predictive AI system</td>
+              </tr>
+              <tr>
+                <td className={styles.featureCell}>Condition Programs</td>
+                <td>Basic programs (simple plans)</td>
+                <td>Advanced structured programs</td>
+                <td>Clinical recovery programs</td>
+              </tr>
+              <tr>
+                <td className={styles.featureCell}>Group Yoga Sessions</td>
+                <td>Daily Sessions (Mon - Fri)</td>
+                <td>Daily Sessions (Mon - Fri)</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td className={styles.featureCell}>Doctor Consultation</td>
+                <td>No</td>
+                <td>2 (Can be extended for a fee)</td>
+                <td>2 Sessions Monthly (As per Client's Need)</td>
+              </tr>
+              <tr>
+                <td className={styles.featureCell}>Nutrition Support</td>
+                <td>General nutrition plan</td>
+                <td>2 (Can be extended for a fee)</td>
+                <td>4 Sessions monthly</td>
+              </tr>
+              <tr>
+                <td className={styles.featureCell}>Physiotherapy</td>
+                <td>No</td>
+                <td>No</td>
+                <td>4 Sessions Monthly</td>
+              </tr>
+              <tr>
+                <td className={styles.featureCell}>Psychologist Support</td>
+                <td>No</td>
+                <td>No</td>
+                <td>2 Sessions Monthly</td>
+              </tr>
+              <tr className={styles.priceRow}>
+                <td className={styles.featureCell} style={{ verticalAlign: 'middle' }}>Pricing</td>
+                <td>
+                  <span className={styles.priceText}>₹1,999<small>/mo</small></span>
+                  <button className={styles.selectBtn} onClick={() => handleSelectPlan('foundation')}>Select Foundation</button>
+                </td>
+                <td>
+                  <span className={styles.priceText}>₹4,999<small>/mo</small></span>
+                  <button className={styles.selectBtn} onClick={() => handleSelectPlan('balanced')}>Select Balanced</button>
+                </td>
+                <td>
+                  <span className={styles.priceText}>₹11,999<small>/mo</small></span>
+                  <button className={styles.selectBtn} onClick={() => handleSelectPlan('transform')}>Select Transform</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         <div className={styles.faqSection}>

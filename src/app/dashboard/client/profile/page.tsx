@@ -71,7 +71,7 @@ export default function ClientProfile() {
               <div className={styles.profileInfo}>
                 <h2>{user?.name}</h2>
                 <p className={styles.email}>{user?.email}</p>
-                <Badge variant={user?.tier === 'elite' ? 'gold' : 'primary'}>
+                <Badge variant={user?.tier === 'transform' ? 'gold' : 'primary'}>
                   {user?.tier} Plan Member
                 </Badge>
               </div>

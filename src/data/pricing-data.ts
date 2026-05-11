@@ -1,3 +1,5 @@
+export type ClientTier = 'foundation' | 'balanced' | 'transform';
+
 export interface PricingPlan {
   id: string;
   name: string;
@@ -12,51 +14,52 @@ export interface PricingPlan {
 
 export const pricingPlans: PricingPlan[] = [
   {
-    id: 'essential',
-    name: 'Essential',
-    subtitle: 'Routine',
-    targetAudience: 'Beginners & Lifestyle Users',
-    coreOffering: 'Daily Live Yoga + Basic AI personalization.',
-    price: 899,
+    id: 'foundation',
+    name: 'Foundation',
+    subtitle: 'Base Layer',
+    targetAudience: 'Beginners',
+    coreOffering: 'Basic programs',
+    price: 1999,
     features: [
-      'Unlimited group yoga classes',
-      'Basic wellness tracking',
-      'Community support',
-      'Access to recorded sessions'
+      'Daily Live Yoga Sessions (Mon - Fri)',
+      'Basic condition programs',
+      'Limited AI Personalization',
+      'General nutrition plan'
     ],
   },
   {
-    id: 'therapeutic',
-    name: 'Therapeutic',
-    subtitle: 'Recovery',
-    targetAudience: 'Result Seekers & Patients',
-    coreOffering: 'Goal-based programs + Group Therapy sessions.',
-    price: 2499,
+    id: 'balanced',
+    name: 'Balanced',
+    subtitle: 'Structured',
+    targetAudience: 'Regular Users',
+    coreOffering: 'Advanced programs',
+    price: 4999,
     isPopular: true,
     features: [
-      'Everything in Essential',
-      '2 Group Therapy sessions/week',
-      '1 Priority 1-on-1 session/month',
-      'Advanced AI personalization',
-      'Medical document analysis',
-      'Priority email support'
+      '4 1-on-1 Yoga Therapy Sessions / mo',
+      'Daily Live Yoga Sessions (Mon - Fri)',
+      '2 Doctor Consultations',
+      '2 Nutrition Support Sessions',
+      'Personalised AI recommendations & Tracking',
+      'Advanced structured condition programs'
     ],
   },
   {
-    id: 'elite',
-    name: 'Elite',
-    subtitle: 'Personalized',
-    targetAudience: 'Premium Users',
-    coreOffering: 'Dedicated manager + 2 Priority 1-on-1 sessions.',
-    price: 7499,
+    id: 'transform',
+    name: 'Transform',
+    subtitle: 'Clinical',
+    targetAudience: 'Recovery Focused',
+    coreOffering: 'Full predictive system',
+    price: 11999,
     isPremium: true,
     features: [
-      'Everything in Therapeutic',
-      '2 Priority 1-on-1 sessions/month',
-      'Dedicated health manager',
-      'Full AI suite access',
-      'Custom nutrition plan',
-      'WhatsApp support'
+      '12 1-on-1 Yoga Therapy Sessions / mo',
+      '2 Doctor Consultations (As per Need)',
+      '4 Nutrition Support Sessions / mo',
+      '4 Physiotherapy Sessions / mo',
+      '2 Psychologist Support Sessions / mo',
+      'Advanced predictive AI system',
+      'Clinical recovery programs'
     ],
   }
 ];

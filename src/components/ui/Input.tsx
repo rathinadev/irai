@@ -15,7 +15,8 @@ export function Input({
   id,
   ...props 
 }: InputProps) {
-  const inputId = id || `input-${Math.random().toString(36).substring(2, 9)}`;
+  const reactId = React.useId();
+  const inputId = id || reactId;
   
   return (
     <div className={`${styles.wrapper} ${fullWidth ? styles.fullWidth : ''} ${className}`}>
